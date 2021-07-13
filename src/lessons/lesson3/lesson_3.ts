@@ -18,3 +18,22 @@ console.log('lesson 3');
 
 // just a plug
 export default ()=>{};
+
+
+let promise = new Promise((resolve, reject) => {
+    // do some code
+
+    setTimeout(() => {
+        resolve(10);
+        reject();
+    }, 2000)
+})
+
+const testPromise = promise.then((res) => {
+    console.log("resolve ", res)
+    return 30;
+}, (err) => {})
+console.log("testPromise", testPromise);
+testPromise.then(res2 => {
+    console.log("second resolve", res2);
+}, err => {})
