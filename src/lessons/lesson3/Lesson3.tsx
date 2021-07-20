@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import API from './API';
 import './lesson_3';
 
@@ -8,17 +8,30 @@ const Lesson3 = () => {
     const [searchNameByType, setSearchNameByType] = useState('');
     const [searchResultByType, setSearchResultByType] = useState('');
 
-    const searchFilm = () => {
-        API.searchFilmsByTitle(searchName)
-            .then(response => {
-                console.log(response);
-                if(response.data.Response === 'True') {
-                    setSearchResult(JSON.stringify(response.data.Search));
-                } else {
-                    setSearchResult(response.data.Error);
-                }
-            })
-            .catch(err => console.log(err));
+    // const searchFilm = () => {
+    //     API.searchFilmsByTitle(searchName)
+    //         .then(response => {
+    //             console.log(response);
+    //             if(response.data.Response === 'True') {
+    //                 setSearchResult(JSON.stringify(response.data.Search));
+    //             } else {
+    //                 setSearchResult(response.data.Error);
+    //             }
+    //         })
+    //         .catch(err => console.log(err));
+    // };
+    const searchFilm = async () => {
+        try {
+            const {data} = await API.searchFilmsByTitle(searchName)
+            const {Response, Search, Error} = data
+            if (Response === "true") {
+                setSearchResult(JSON.stringify(Search))
+            } else {
+                setSearchResult(Error)
+            }
+        } catch (err) {
+            console.log("some error exist " + err)
+        }
     };
 
     const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {

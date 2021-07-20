@@ -17,23 +17,25 @@ console.log('lesson 3');
 
 
 // just a plug
-export default ()=>{};
+export default () => {
+};
 
 
-let promise = new Promise((resolve, reject) => {
-    // do some code
+//
+// async function f() {
+//     throw 0
+// }
+//
+// console.log(f().catch(err => {
+//     console.log("callback err " + err);
+// }) );
 
-    setTimeout(() => {
-        resolve(10);
-        reject();
-    }, 2000)
-})
 
-const testPromise = promise.then((res) => {
-    console.log("resolve ", res)
-    return 30;
-}, (err) => {})
-console.log("testPromise", testPromise);
-testPromise.then(res2 => {
-    console.log("second resolve", res2);
-}, err => {})
+
+
+async function f () {
+    let a = 10
+    a = 10 + 5
+
+    // let resolve = await // some async code
+}
